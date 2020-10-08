@@ -1,0 +1,551 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="sistema_nominaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="departamento">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="ubicacion_fisica" Type="varchar" MaxLength="80" />
+          <Property Name="responsable_area" Type="int" />
+        </EntityType>
+        <EntityType Name="empleado">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="50" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="departamento" Type="int" />
+          <Property Name="puesto" Type="int" />
+          <Property Name="nomina" Type="int" />
+          <Property Name="salario" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="empleado_deduccion">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empleadoId" Type="int" />
+          <Property Name="deduccionId" Type="int" />
+        </EntityType>
+        <EntityType Name="empleado_ingreso">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="empleadoId" Type="int" />
+          <Property Name="ingresoId" Type="int" />
+        </EntityType>
+        <EntityType Name="nomina">
+          <Key>
+            <PropertyRef Name="id_nomina" />
+          </Key>
+          <Property Name="id_nomina" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tipo" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="puesto">
+          <Key>
+            <PropertyRef Name="id_puesto" />
+          </Key>
+          <Property Name="id_puesto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" />
+          <Property Name="nive_riesgo_salario" Type="varchar" MaxLength="50" />
+          <Property Name="nivel_minimo_salario" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="nivel_maximo_salario" Type="decimal" Precision="10" Scale="2" />
+        </EntityType>
+        <EntityType Name="tipo_deduccion">
+          <Key>
+            <PropertyRef Name="id_deduccion" />
+          </Key>
+          <Property Name="id_deduccion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <EntityType Name="tipo_ingreso">
+          <Key>
+            <PropertyRef Name="id_ingreso" />
+          </Key>
+          <Property Name="id_ingreso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="estado" Type="bit" />
+        </EntityType>
+        <Association Name="fk_deduccion">
+          <End Role="tipo_deduccion" Type="Self.tipo_deduccion" Multiplicity="0..1" />
+          <End Role="empleado_deduccion" Type="Self.empleado_deduccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_deduccion">
+              <PropertyRef Name="id_deduccion" />
+            </Principal>
+            <Dependent Role="empleado_deduccion">
+              <PropertyRef Name="deduccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_departamento">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empleado">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+          <End Role="empleado_deduccion" Type="Self.empleado_deduccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="empleado_deduccion">
+              <PropertyRef Name="empleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empleado_ingreso">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+          <End Role="empleado_ingreso" Type="Self.empleado_ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="empleado_ingreso">
+              <PropertyRef Name="empleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ingreso_empleado">
+          <End Role="tipo_ingreso" Type="Self.tipo_ingreso" Multiplicity="0..1" />
+          <End Role="empleado_ingreso" Type="Self.empleado_ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_ingreso">
+              <PropertyRef Name="id_ingreso" />
+            </Principal>
+            <Dependent Role="empleado_ingreso">
+              <PropertyRef Name="ingresoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_nomina">
+          <End Role="nomina" Type="Self.nomina" Multiplicity="0..1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nomina">
+              <PropertyRef Name="id_nomina" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="nomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puesto">
+          <End Role="puesto" Type="Self.puesto" Multiplicity="0..1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="puesto">
+              <PropertyRef Name="id_puesto" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="puesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_responsable_area">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+          <End Role="departamento" Type="Self.departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="departamento">
+              <PropertyRef Name="responsable_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="sistema_nominaModelStoreContainer">
+          <EntitySet Name="departamento" EntityType="Self.departamento" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empleado" EntityType="Self.empleado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empleado_deduccion" EntityType="Self.empleado_deduccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="empleado_ingreso" EntityType="Self.empleado_ingreso" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="nomina" EntityType="Self.nomina" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="puesto" EntityType="Self.puesto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_deduccion" EntityType="Self.tipo_deduccion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tipo_ingreso" EntityType="Self.tipo_ingreso" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_deduccion" Association="Self.fk_deduccion">
+            <End Role="tipo_deduccion" EntitySet="tipo_deduccion" />
+            <End Role="empleado_deduccion" EntitySet="empleado_deduccion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_departamento" Association="Self.fk_departamento">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empleado" Association="Self.fk_empleado">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="empleado_deduccion" EntitySet="empleado_deduccion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empleado_ingreso" Association="Self.fk_empleado_ingreso">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="empleado_ingreso" EntitySet="empleado_ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ingreso_empleado" Association="Self.fk_ingreso_empleado">
+            <End Role="tipo_ingreso" EntitySet="tipo_ingreso" />
+            <End Role="empleado_ingreso" EntitySet="empleado_ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_nomina" Association="Self.fk_nomina">
+            <End Role="nomina" EntitySet="nomina" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puesto" Association="Self.fk_puesto">
+            <End Role="puesto" EntitySet="puesto" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_responsable_area" Association="Self.fk_responsable_area">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="departamento" EntitySet="departamento" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="sistema_nominaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="departamento">
+          <Key>
+            <PropertyRef Name="id_departamento" />
+          </Key>
+          <Property Name="id_departamento" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ubicacion_fisica" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="responsable_area" Type="Int32" />
+          <NavigationProperty Name="empleado" Relationship="Self.fk_departamento" FromRole="departamento" ToRole="empleado" />
+          <NavigationProperty Name="empleado1" Relationship="Self.fk_responsable_area" FromRole="departamento" ToRole="empleado" />
+        </EntityType>
+        <EntityType Name="empleado">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="departamento" Type="Int32" />
+          <Property Name="puesto" Type="Int32" />
+          <Property Name="nomina" Type="Int32" />
+          <NavigationProperty Name="departamento1" Relationship="Self.fk_departamento" FromRole="empleado" ToRole="departamento" />
+          <NavigationProperty Name="departamento2" Relationship="Self.fk_responsable_area" FromRole="empleado" ToRole="departamento" />
+          <NavigationProperty Name="nomina1" Relationship="Self.fk_nomina" FromRole="empleado" ToRole="nomina" />
+          <NavigationProperty Name="puesto1" Relationship="Self.fk_puesto" FromRole="empleado" ToRole="puesto" />
+          <Property Name="salario" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="empleado_deduccion" Relationship="sistema_nominaModel.fk_empleado1" FromRole="empleado" ToRole="empleado_deduccion" />
+          <NavigationProperty Name="empleado_ingreso" Relationship="sistema_nominaModel.fk_empleado_ingreso" FromRole="empleado" ToRole="empleado_ingreso" />
+        </EntityType>
+        <EntityType Name="nomina">
+          <Key>
+            <PropertyRef Name="id_nomina" />
+          </Key>
+          <Property Name="id_nomina" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tipo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="empleado" Relationship="Self.fk_nomina" FromRole="nomina" ToRole="empleado" />
+        </EntityType>
+        <EntityType Name="puesto">
+          <Key>
+            <PropertyRef Name="id_puesto" />
+          </Key>
+          <Property Name="id_puesto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nive_riesgo_salario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="nivel_minimo_salario" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="nivel_maximo_salario" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="empleado" Relationship="Self.fk_puesto" FromRole="puesto" ToRole="empleado" />
+        </EntityType>
+        <EntityType Name="tipo_deduccion">
+          <Key>
+            <PropertyRef Name="id_deduccion" />
+          </Key>
+          <Property Name="id_deduccion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="empleado_deduccion" Relationship="sistema_nominaModel.fk_deduccion" FromRole="tipo_deduccion" ToRole="empleado_deduccion" />
+        </EntityType>
+        <EntityType Name="tipo_ingreso">
+          <Key>
+            <PropertyRef Name="id_ingreso" />
+          </Key>
+          <Property Name="id_ingreso" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Boolean" />
+          <NavigationProperty Name="empleado_ingreso" Relationship="sistema_nominaModel.fk_ingreso_empleado" FromRole="tipo_ingreso" ToRole="empleado_ingreso" />
+        </EntityType>
+        <Association Name="fk_departamento">
+          <End Role="departamento" Type="Self.departamento" Multiplicity="0..1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="departamento">
+              <PropertyRef Name="id_departamento" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="departamento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_responsable_area">
+          <End Role="empleado" Type="Self.empleado" Multiplicity="0..1" />
+          <End Role="departamento" Type="Self.departamento" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="departamento">
+              <PropertyRef Name="responsable_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_nomina">
+          <End Role="nomina" Type="Self.nomina" Multiplicity="0..1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="nomina">
+              <PropertyRef Name="id_nomina" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="nomina" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_puesto">
+          <End Role="puesto" Type="Self.puesto" Multiplicity="0..1" />
+          <End Role="empleado" Type="Self.empleado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="puesto">
+              <PropertyRef Name="id_puesto" />
+            </Principal>
+            <Dependent Role="empleado">
+              <PropertyRef Name="puesto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SistemaNominaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="departamento" EntityType="Self.departamento" />
+          <EntitySet Name="empleado" EntityType="Self.empleado" />
+          <EntitySet Name="nomina" EntityType="Self.nomina" />
+          <EntitySet Name="puesto" EntityType="Self.puesto" />
+          <EntitySet Name="tipo_deduccion" EntityType="Self.tipo_deduccion" />
+          <EntitySet Name="tipo_ingreso" EntityType="Self.tipo_ingreso" />
+          <AssociationSet Name="fk_departamento" Association="Self.fk_departamento">
+            <End Role="departamento" EntitySet="departamento" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_responsable_area" Association="Self.fk_responsable_area">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="departamento" EntitySet="departamento" />
+          </AssociationSet>
+          <AssociationSet Name="fk_nomina" Association="Self.fk_nomina">
+            <End Role="nomina" EntitySet="nomina" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_puesto" Association="Self.fk_puesto">
+            <End Role="puesto" EntitySet="puesto" />
+            <End Role="empleado" EntitySet="empleado" />
+          </AssociationSet>
+          <EntitySet Name="empleado_deduccion" EntityType="sistema_nominaModel.empleado_deduccion" />
+          <EntitySet Name="empleado_ingreso" EntityType="sistema_nominaModel.empleado_ingreso" />
+          <AssociationSet Name="fk_empleado1" Association="sistema_nominaModel.fk_empleado1">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="empleado_deduccion" EntitySet="empleado_deduccion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_empleado_ingreso" Association="sistema_nominaModel.fk_empleado_ingreso">
+            <End Role="empleado" EntitySet="empleado" />
+            <End Role="empleado_ingreso" EntitySet="empleado_ingreso" />
+          </AssociationSet>
+          <AssociationSet Name="fk_deduccion" Association="sistema_nominaModel.fk_deduccion">
+            <End Role="tipo_deduccion" EntitySet="tipo_deduccion" />
+            <End Role="empleado_deduccion" EntitySet="empleado_deduccion" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ingreso_empleado" Association="sistema_nominaModel.fk_ingreso_empleado">
+            <End Role="tipo_ingreso" EntitySet="tipo_ingreso" />
+            <End Role="empleado_ingreso" EntitySet="empleado_ingreso" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="empleado_deduccion">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empleadoId" Type="Int32" />
+          <Property Name="deduccionId" Type="Int32" />
+          <NavigationProperty Name="empleado" Relationship="sistema_nominaModel.fk_empleado1" FromRole="empleado_deduccion" ToRole="empleado" />
+          <NavigationProperty Name="tipo_deduccion" Relationship="sistema_nominaModel.fk_deduccion" FromRole="empleado_deduccion" ToRole="tipo_deduccion" />
+        </EntityType>
+        <EntityType Name="empleado_ingreso">
+          <Key>
+            <PropertyRef Name="id_empleado" />
+          </Key>
+          <Property Name="id_empleado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="empleadoId" Type="Int32" />
+          <Property Name="ingresoId" Type="Int32" />
+          <NavigationProperty Name="empleado" Relationship="sistema_nominaModel.fk_empleado_ingreso" FromRole="empleado_ingreso" ToRole="empleado" />
+          <NavigationProperty Name="tipo_ingreso" Relationship="sistema_nominaModel.fk_ingreso_empleado" FromRole="empleado_ingreso" ToRole="tipo_ingreso" />
+        </EntityType>
+        <Association Name="fk_empleado1">
+          <End Type="sistema_nominaModel.empleado" Role="empleado" Multiplicity="0..1" />
+          <End Type="sistema_nominaModel.empleado_deduccion" Role="empleado_deduccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="empleado_deduccion">
+              <PropertyRef Name="empleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_empleado_ingreso">
+          <End Type="sistema_nominaModel.empleado" Role="empleado" Multiplicity="0..1" />
+          <End Type="sistema_nominaModel.empleado_ingreso" Role="empleado_ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="empleado">
+              <PropertyRef Name="id_empleado" />
+            </Principal>
+            <Dependent Role="empleado_ingreso">
+              <PropertyRef Name="empleadoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_deduccion">
+          <End Type="sistema_nominaModel.tipo_deduccion" Role="tipo_deduccion" Multiplicity="0..1" />
+          <End Type="sistema_nominaModel.empleado_deduccion" Role="empleado_deduccion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_deduccion">
+              <PropertyRef Name="id_deduccion" />
+            </Principal>
+            <Dependent Role="empleado_deduccion">
+              <PropertyRef Name="deduccionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ingreso_empleado">
+          <End Type="sistema_nominaModel.tipo_ingreso" Role="tipo_ingreso" Multiplicity="0..1" />
+          <End Type="sistema_nominaModel.empleado_ingreso" Role="empleado_ingreso" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tipo_ingreso">
+              <PropertyRef Name="id_ingreso" />
+            </Principal>
+            <Dependent Role="empleado_ingreso">
+              <PropertyRef Name="ingresoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="sistema_nominaModelStoreContainer" CdmEntityContainer="SistemaNominaEntities">
+          <EntitySetMapping Name="departamento">
+            <EntityTypeMapping TypeName="sistema_nominaModel.departamento">
+              <MappingFragment StoreEntitySet="departamento">
+                <ScalarProperty Name="id_departamento" ColumnName="id_departamento" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="ubicacion_fisica" ColumnName="ubicacion_fisica" />
+                <ScalarProperty Name="responsable_area" ColumnName="responsable_area" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empleado">
+            <EntityTypeMapping TypeName="sistema_nominaModel.empleado">
+              <MappingFragment StoreEntitySet="empleado">
+                <ScalarProperty Name="salario" ColumnName="salario" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="departamento" ColumnName="departamento" />
+                <ScalarProperty Name="puesto" ColumnName="puesto" />
+                <ScalarProperty Name="nomina" ColumnName="nomina" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="nomina">
+            <EntityTypeMapping TypeName="sistema_nominaModel.nomina">
+              <MappingFragment StoreEntitySet="nomina">
+                <ScalarProperty Name="id_nomina" ColumnName="id_nomina" />
+                <ScalarProperty Name="tipo" ColumnName="tipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="puesto">
+            <EntityTypeMapping TypeName="sistema_nominaModel.puesto">
+              <MappingFragment StoreEntitySet="puesto">
+                <ScalarProperty Name="id_puesto" ColumnName="id_puesto" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="nive_riesgo_salario" ColumnName="nive_riesgo_salario" />
+                <ScalarProperty Name="nivel_minimo_salario" ColumnName="nivel_minimo_salario" />
+                <ScalarProperty Name="nivel_maximo_salario" ColumnName="nivel_maximo_salario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_deduccion">
+            <EntityTypeMapping TypeName="sistema_nominaModel.tipo_deduccion">
+              <MappingFragment StoreEntitySet="tipo_deduccion">
+                <ScalarProperty Name="id_deduccion" ColumnName="id_deduccion" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tipo_ingreso">
+            <EntityTypeMapping TypeName="sistema_nominaModel.tipo_ingreso">
+              <MappingFragment StoreEntitySet="tipo_ingreso">
+                <ScalarProperty Name="id_ingreso" ColumnName="id_ingreso" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empleado_deduccion">
+            <EntityTypeMapping TypeName="sistema_nominaModel.empleado_deduccion">
+              <MappingFragment StoreEntitySet="empleado_deduccion">
+                <ScalarProperty Name="deduccionId" ColumnName="deduccionId" />
+                <ScalarProperty Name="empleadoId" ColumnName="empleadoId" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="empleado_ingreso">
+            <EntityTypeMapping TypeName="sistema_nominaModel.empleado_ingreso">
+              <MappingFragment StoreEntitySet="empleado_ingreso">
+                <ScalarProperty Name="ingresoId" ColumnName="ingresoId" />
+                <ScalarProperty Name="empleadoId" ColumnName="empleadoId" />
+                <ScalarProperty Name="id_empleado" ColumnName="id_empleado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

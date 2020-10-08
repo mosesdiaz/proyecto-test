@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8a77611f1e904005ae3f6380c1a78e07" Name="Diagram1">
+        <EntityTypeShape EntityType="sistema_nominaModel.departamento" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_nominaModel.empleado" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_nominaModel.nomina" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_nominaModel.puesto" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_nominaModel.tipo_deduccion" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="sistema_nominaModel.tipo_ingreso" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <AssociationConnector Association="sistema_nominaModel.fk_departamento" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_nominaModel.fk_responsable_area" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_nominaModel.fk_nomina" ManuallyRouted="false" />
+        <AssociationConnector Association="sistema_nominaModel.fk_puesto" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="sistema_nominaModel.empleado_deduccion" Width="2.125" PointX="8.25" PointY="5.625" />
+        <EntityTypeShape EntityType="sistema_nominaModel.empleado_ingreso" Width="2.125" PointX="5.25" PointY="6.875" />
+        <AssociationConnector Association="sistema_nominaModel.fk_empleado1" />
+        <AssociationConnector Association="sistema_nominaModel.fk_empleado_ingreso" />
+        <AssociationConnector Association="sistema_nominaModel.fk_deduccion" />
+        <AssociationConnector Association="sistema_nominaModel.fk_ingreso_empleado" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
