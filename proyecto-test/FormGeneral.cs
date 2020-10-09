@@ -39,5 +39,11 @@ namespace proyecto_test
             FormGestPuestos frm = new FormGestPuestos();
             frm.Show();
         }
+
+        private void gestionDeTiposDeNominasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestNomina frm = new FormGestNomina();
+            frm.Show();
+        }
     }
 }

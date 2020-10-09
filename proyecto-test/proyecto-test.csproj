@@ -73,6 +73,12 @@
     <Compile Include="FormEdIngresos.Designer.cs">
       <DependentUpon>FormEdIngresos.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEdNomina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEdNomina.Designer.cs">
+      <DependentUpon>FormEdNomina.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormEdPuestos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,12 @@
     </Compile>
     <Compile Include="FormGestIngresos.Designer.cs">
       <DependentUpon>FormGestIngresos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestNomina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestNomina.Designer.cs">
+      <DependentUpon>FormGestNomina.cs</DependentUpon>
     </Compile>
     <Compile Include="FormGestPuestos.cs">
       <SubType>Form</SubType>
@@ -141,6 +153,9 @@
     <EmbeddedResource Include="FormEdIngresos.resx">
       <DependentUpon>FormEdIngresos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEdNomina.resx">
+      <DependentUpon>FormEdNomina.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormEdPuestos.resx">
       <DependentUpon>FormEdPuestos.cs</DependentUpon>
     </EmbeddedResource>
@@ -155,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestIngresos.resx">
       <DependentUpon>FormGestIngresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestNomina.resx">
+      <DependentUpon>FormGestNomina.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestPuestos.resx">
       <DependentUpon>FormGestPuestos.cs</DependentUpon>
