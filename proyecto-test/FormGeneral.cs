@@ -33,5 +33,11 @@ namespace proyecto_test
         {
             Application.Exit();
         }
+
+        private void gestionDePuestosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestPuestos frm = new FormGestPuestos();
+            frm.Show();
+        }
     }
 }

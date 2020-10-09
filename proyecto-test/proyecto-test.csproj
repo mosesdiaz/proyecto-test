@@ -73,6 +73,12 @@
     <Compile Include="FormEdIngresos.Designer.cs">
       <DependentUpon>FormEdIngresos.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormEdPuestos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEdPuestos.Designer.cs">
+      <DependentUpon>FormEdPuestos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGeneral.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,12 @@
     </Compile>
     <Compile Include="FormGestIngresos.Designer.cs">
       <DependentUpon>FormGestIngresos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormGestPuestos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormGestPuestos.Designer.cs">
+      <DependentUpon>FormGestPuestos.cs</DependentUpon>
     </Compile>
     <Compile Include="nomina.cs">
       <DependentUpon>SistemaNominaModel.tt</DependentUpon>
@@ -129,6 +141,9 @@
     <EmbeddedResource Include="FormEdIngresos.resx">
       <DependentUpon>FormEdIngresos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormEdPuestos.resx">
+      <DependentUpon>FormEdPuestos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormGeneral.resx">
       <DependentUpon>FormGeneral.cs</DependentUpon>
     </EmbeddedResource>
@@ -140,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormGestIngresos.resx">
       <DependentUpon>FormGestIngresos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGestPuestos.resx">
+      <DependentUpon>FormGestPuestos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
