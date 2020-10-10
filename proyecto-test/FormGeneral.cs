@@ -45,5 +45,16 @@ namespace proyecto_test
             FormGestNomina frm = new FormGestNomina();
             frm.Show();
         }
+
+        private void gestionDeEmpleadosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gestionToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormGestEmpleados frm = new FormGestEmpleados();
+            frm.Show();
+        }
     }
 }
