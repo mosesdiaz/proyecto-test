@@ -30,15 +30,16 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.gestionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignacionDeDeduccionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.asignacionDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDeDeduccionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDeIngresosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDePuestosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionDeTiposDeNominasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salidaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.EmpleadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gestionToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignacionDeDeduccionesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.asignacionDeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gestionDeDepartamentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,6 +59,7 @@
             // 
             this.gestionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.EmpleadosToolStripMenuItem,
+            this.gestionDeDepartamentosToolStripMenuItem,
             this.gestionDeDeduccionesToolStripMenuItem,
             this.gestionDeIngresosToolStripMenuItem,
             this.gestionDePuestosToolStripMenuItem,
@@ -65,6 +67,36 @@
             this.gestionToolStripMenuItem.Name = "gestionToolStripMenuItem";
             this.gestionToolStripMenuItem.Size = new System.Drawing.Size(71, 24);
             this.gestionToolStripMenuItem.Text = "Gestion";
+            // 
+            // EmpleadosToolStripMenuItem
+            // 
+            this.EmpleadosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gestionToolStripMenuItem1,
+            this.asignacionDeDeduccionesToolStripMenuItem,
+            this.asignacionDeToolStripMenuItem});
+            this.EmpleadosToolStripMenuItem.Name = "EmpleadosToolStripMenuItem";
+            this.EmpleadosToolStripMenuItem.Size = new System.Drawing.Size(273, 26);
+            this.EmpleadosToolStripMenuItem.Text = "Empleados";
+            this.EmpleadosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeEmpleadosToolStripMenuItem_Click);
+            // 
+            // gestionToolStripMenuItem1
+            // 
+            this.gestionToolStripMenuItem1.Name = "gestionToolStripMenuItem1";
+            this.gestionToolStripMenuItem1.Size = new System.Drawing.Size(265, 26);
+            this.gestionToolStripMenuItem1.Text = "Gestion de empleados";
+            this.gestionToolStripMenuItem1.Click += new System.EventHandler(this.gestionToolStripMenuItem1_Click);
+            // 
+            // asignacionDeDeduccionesToolStripMenuItem
+            // 
+            this.asignacionDeDeduccionesToolStripMenuItem.Name = "asignacionDeDeduccionesToolStripMenuItem";
+            this.asignacionDeDeduccionesToolStripMenuItem.Size = new System.Drawing.Size(265, 26);
+            this.asignacionDeDeduccionesToolStripMenuItem.Text = "Asignacion de deducciones";
+            // 
+            // asignacionDeToolStripMenuItem
+            // 
+            this.asignacionDeToolStripMenuItem.Name = "asignacionDeToolStripMenuItem";
+            this.asignacionDeToolStripMenuItem.Size = new System.Drawing.Size(265, 26);
+            this.asignacionDeToolStripMenuItem.Text = "Asignacion de ingresos";
             // 
             // gestionDeDeduccionesToolStripMenuItem
             // 
@@ -101,35 +133,12 @@
             this.salidaToolStripMenuItem.Text = "Salida";
             this.salidaToolStripMenuItem.Click += new System.EventHandler(this.salidaToolStripMenuItem_Click);
             // 
-            // EmpleadosToolStripMenuItem
+            // gestionDeDepartamentosToolStripMenuItem
             // 
-            this.EmpleadosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gestionToolStripMenuItem1,
-            this.asignacionDeDeduccionesToolStripMenuItem,
-            this.asignacionDeToolStripMenuItem});
-            this.EmpleadosToolStripMenuItem.Name = "EmpleadosToolStripMenuItem";
-            this.EmpleadosToolStripMenuItem.Size = new System.Drawing.Size(273, 26);
-            this.EmpleadosToolStripMenuItem.Text = "Empleados";
-            this.EmpleadosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeEmpleadosToolStripMenuItem_Click);
-            // 
-            // gestionToolStripMenuItem1
-            // 
-            this.gestionToolStripMenuItem1.Name = "gestionToolStripMenuItem1";
-            this.gestionToolStripMenuItem1.Size = new System.Drawing.Size(265, 26);
-            this.gestionToolStripMenuItem1.Text = "Gestion de empleados";
-            this.gestionToolStripMenuItem1.Click += new System.EventHandler(this.gestionToolStripMenuItem1_Click);
-            // 
-            // asignacionDeDeduccionesToolStripMenuItem
-            // 
-            this.asignacionDeDeduccionesToolStripMenuItem.Name = "asignacionDeDeduccionesToolStripMenuItem";
-            this.asignacionDeDeduccionesToolStripMenuItem.Size = new System.Drawing.Size(265, 26);
-            this.asignacionDeDeduccionesToolStripMenuItem.Text = "Asignacion de deducciones";
-            // 
-            // asignacionDeToolStripMenuItem
-            // 
-            this.asignacionDeToolStripMenuItem.Name = "asignacionDeToolStripMenuItem";
-            this.asignacionDeToolStripMenuItem.Size = new System.Drawing.Size(265, 26);
-            this.asignacionDeToolStripMenuItem.Text = "Asignacion de ingresos";
+            this.gestionDeDepartamentosToolStripMenuItem.Name = "gestionDeDepartamentosToolStripMenuItem";
+            this.gestionDeDepartamentosToolStripMenuItem.Size = new System.Drawing.Size(273, 26);
+            this.gestionDeDepartamentosToolStripMenuItem.Text = "Gestion de departamentos";
+            this.gestionDeDepartamentosToolStripMenuItem.Click += new System.EventHandler(this.gestionDeDepartamentosToolStripMenuItem_Click);
             // 
             // FormGeneral
             // 
@@ -160,5 +169,6 @@
         private System.Windows.Forms.ToolStripMenuItem gestionToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem asignacionDeDeduccionesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem asignacionDeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem gestionDeDepartamentosToolStripMenuItem;
     }
 }

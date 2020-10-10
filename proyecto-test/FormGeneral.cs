@@ -56,5 +56,11 @@ namespace proyecto_test
             FormGestEmpleados frm = new FormGestEmpleados();
             frm.Show();
         }
+
+        private void gestionDeDepartamentosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormGestDepartamentos frm = new FormGestDepartamentos();
+            frm.Show();
+        }
     }
 }
